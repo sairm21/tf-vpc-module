@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
   },
     var.tags)
 }
-
+/*
 module "subnets" {
   source = "./subnets"
   for_each = var.subnets
@@ -19,3 +19,4 @@ module "subnets" {
   tags = var.tags
   az=var.az
 }
+*/
