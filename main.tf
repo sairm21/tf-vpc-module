@@ -19,3 +19,15 @@ module "subnets" {
   tags = var.tags
   az=var.az
 }
+
+resource "aws_vpc_peering_connection" "VPC_peering" {
+  peer_vpc_id   = aws_vpc.main.id
+  vpc_id        = var.default_VPC_id
+  auto_accept   = true
+
+  tags = {
+    Name = "VPC-${var.env} and default VPC"
+  }
+}
+
+
