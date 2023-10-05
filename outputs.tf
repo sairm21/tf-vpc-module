@@ -1,3 +1,3 @@
-output "subnet_is" {
+output "subnet_id" {
   value = module.subnets
 }
