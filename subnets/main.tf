@@ -11,7 +11,7 @@ resource "aws_subnet" "main" {
     var.tags)
 }
 
-resource "aws_route_table" "example" {
+resource "aws_route_table" "routes" {
   vpc_id = var.vpc_id
 
 /*
