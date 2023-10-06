@@ -30,4 +30,11 @@ resource "aws_vpc_peering_connection" "VPC_peering" {
   }
 }
 
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
 
+  tags = merge({
+    Name = "VPC-${var.env}-igw"
+  },
+    var.tags)
+}
