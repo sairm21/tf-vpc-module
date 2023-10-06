@@ -49,7 +49,7 @@ resource "aws_eip" "ngw" {
   domain   = "vpc"
 }
 
-resource "aws_nat_gateway" "example" {
+resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.ngw.id
   subnet_id     = lookup(lookup(module.subnets, "Public", null), "subnet_id", null)[0]
 
@@ -57,4 +57,11 @@ resource "aws_nat_gateway" "example" {
     Name = "VPC-${var.env}-ngw"
   },
     var.tags)
+}
+
+resource "aws_route" "route_ngw" {
+  count = length(local.private_rt_ids)
+  route_table_id            = element(local.private_rt_ids, count.index)
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.ngw.id
 }
