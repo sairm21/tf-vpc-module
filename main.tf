@@ -38,3 +38,9 @@ resource "aws_internet_gateway" "igw" {
   },
     var.tags)
 }
+
+resource "aws_route" "route_igw" {
+  route_table_id            = module.subnets["Public"].route_table_id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.igw.id
+  }
